@@ -50,6 +50,7 @@ module.exports = {
           success: 1,
           message: "login successfully",
           token: jsontoken,
+          user: results.UserID
         });
       } else {
         return res.json({

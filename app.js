@@ -19,6 +19,7 @@ const artistRouter = require("./api/artists/artist.router");
 const songRouter = require("./api/songs/song.router");
 const playlistRouter = require("./api/Playlists/playlist.router");
 const playlistSongsRouter = require("./api/playlistSongs/playlistSong.router");
+const favoriteRouter = require("./api/favorites/favorites.router");
 
 app.use(express.json());
 app.use(cors());
@@ -35,6 +36,7 @@ app.use("/api/artists", artistRouter);
 app.use("/api/songs", songRouter);
 app.use("/api/playlists", playlistRouter);
 app.use("/api/playlistSongs", playlistSongsRouter);
+app.use("/api/favorites", favoriteRouter);
 
 const port = process.env.APP_PORT || 5000;
 
