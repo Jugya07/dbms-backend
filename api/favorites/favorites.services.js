@@ -2,21 +2,35 @@ const pool = require("../../config/database");
 
 module.exports = {
   post: (data, callBack) => {
-    console.log("okay")
     pool.query(
-      `insert into FavoriteSongs( UserID, SongID) 
-                values(?,?)`,
-      [
-        data.user,
-        data.song,
-      ],
-      (error, results, fields) => {
-        if (error) {
-          callBack(error);
+        `Select count(*) as x from FavoriteSongs where UserID = ? AND SongID = ?`,
+        [
+          data.user,
+          data.song,
+        ],
+        (error, results, fields) => {
+          if (error) {
+            callBack(error);
+          }
+          console.log(results[0].x)
+          if(results[0].x==0) {
+          pool.query(
+            `insert into FavoriteSongs( UserID, SongID) 
+                      values(?,?)`,
+            [
+              data.user,
+              data.song,
+            ],
+            (error, results, fields) => {
+              if (error) {
+                callBack(error);
+              }
+              return callBack(null, results);
+            }
+          );
+          }
         }
-        return callBack(null, results);
-      }
-    );
+      );
   },
   get: (id, callBack) => {
     pool.query(
