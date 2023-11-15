@@ -22,9 +22,9 @@ module.exports = {
           message: "Database connection errror",
         });
       }
+      console.log(results);
       return res.status(200).json({
         success: 1,
-        data: results,
       });
     });
   },
@@ -50,7 +50,7 @@ module.exports = {
           success: 1,
           message: "login successfully",
           token: jsontoken,
-          user: results.UserID
+          user: results.UserID,
         });
       } else {
         return res.json({
